@@ -1,0 +1,48 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px 10px 30px;
+    background-color: var(--blanco);
+    border-color: var(--gris-borde);
+    border-style: solid;
+    border-width: 2px;
+    margin-bottom: 30px;
+}
+
+nav h1{
+    font-size: 20px;
+}
+
+nav a {
+    font-size: 16px;
+    color: var(--gris-oscuro);
+    text-decoration: none;
+}
+
+nav a:hover {
+    font-size: 16px;
+    color: var(--gris-oscuro);
+    text-decoration: underline;
+}
+
+nav a:visited {
+    font-size: 16px;
+    color: var(--gris-oscuro);
+    text-decoration: none;
+}
+
+.dashboard-filters {
+    margin: auto;
+}
+
+.filters-btn {
+    background-color: var(--negro);
+    min-height: 2em;
+    color: var(--blanco);
+    font-size: 16px;
+    font-weight: lighter;
+    border-radius: 20px;
+    border-style: none;
+    padding: 5px;
+}
