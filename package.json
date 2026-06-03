@@ -1,0 +1,25 @@
+{
+  "name": "p5-dashboard-individual-simoneavilaarranz",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/simoneavilarranz/p5-dashboard-individual-simoneavilaarranz#readme",
+  "bugs": {
+    "url": "https://github.com/simoneavilarranz/p5-dashboard-individual-simoneavilaarranz/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simoneavilarranz/p5-dashboard-individual-simoneavilaarranz.git"
+  },
+  "license": "ISC",
+  "author": "simoneaa",
+  "type": "module",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test-w": "vitest",
+    "test-cover": "vitest run --coverage"
+  }
+}
