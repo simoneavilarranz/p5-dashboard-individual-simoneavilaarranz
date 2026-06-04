@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
   --negro:#222;
   --gris-bg:#f5f5f5;
@@ -10,7 +12,7 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   background: var(--gris-bg);
   color: black;
   min-height: 100vh;

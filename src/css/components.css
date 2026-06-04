@@ -38,11 +38,10 @@ nav a:visited {
 
 .filters-btn {
     background-color: var(--negro);
-    min-height: 2em;
     color: var(--blanco);
     font-size: 16px;
     font-weight: lighter;
     border-radius: 20px;
     border-style: none;
-    padding: 5px;
+    padding: 10px;
 }
