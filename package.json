@@ -21,5 +21,8 @@
     "test": "vitest run",
     "test-w": "vitest",
     "test-cover": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.8"
   }
 }
