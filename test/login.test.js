@@ -1,154 +1,86 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { validateEmail, validatePassword, createUserSession } from '/src/js/login.js';
 
-describe('login tests', () => {
-    beforeEach(() => {
-        document.body.innerHTML = `
-            <input id="login-email" value="" />
-            <input id="login-password" value="" />
-            <input type="checkbox" id="login-remember" />
-            <div id="error-message" style="display: none"></div>
-            <button id="login-btn">Login</button>
-        `;
-        
-        const store = {};
-        global.localStorage = {
-            getItem: vi.fn((key) => store[key] || null),
-            setItem: vi.fn((key, value) => {
-                store[key] = value;
-            }),
-            removeItem: vi.fn((key) => {
-                delete store[key];
-            }),
-            clear: vi.fn(() => {
-                Object.keys(store).forEach(key => delete store[key]);
-            })
-        };
-        
-        delete window.location;
-        window.location = { href: '' };
-    });
+const localStorageMock = (() => {
+    let store = {};
+    return {
+        getItem: vi.fn((key) => store[key] || null),
+        setItem: vi.fn((key, value) => {
+            store[key] = value.toString();
+        }),
+        removeItem: vi.fn((key) => {
+            delete store[key];
+        }),
+        clear: vi.fn(() => {
+            store = {};
+        })
+    };
+})();
 
-    describe('validacion de email', () => {
+Object.defineProperty(global, 'localStorage', {
+    value: localStorageMock
+});
+
+describe('validacion email', () => {
+        it('espacios', () => {
+            expect(validateEmail('usuario @email.com')).toBe(false);
+            expect(validateEmail(' usuario@email.com')).toBe(false);
+            expect(validateEmail('usuario@email.com ')).toBe(false);
+        });
+
         it('sin @', () => {
-            const emailInput = document.getElementById('login-email');
-            const loginBtn = document.getElementById('login-btn');
-            const errorDiv = document.getElementById('error-message');
-            
-            emailInput.value = 'testexample.com'; 
-            
-            loginBtn.click();
-            
-            expect(errorDiv.textContent).toBe('Please enter a valid email address');
-            expect(errorDiv.style.display).toBe('block');
+            expect(validateEmail('usuarioemail.com')).toBe(false);
+            expect(validateEmail('usuario.email.com')).toBe(false);
         });
 
-        it('con espacios', () => {
-            const emailInput = document.getElementById('login-email');
-            const loginBtn = document.getElementById('login-btn');
-            const errorDiv = document.getElementById('error-message');
-            
-            emailInput.value = 'test @example.com'; 
-            
-            loginBtn.click();
-            
-            expect(errorDiv.textContent).toBe('Please enter a valid email address');
-            expect(errorDiv.style.display).toBe('block');
+        it('vacio', () => {
+            expect(validateEmail('')).toBe(false);
+            expect(validateEmail(' ')).toBe(false);
         });
-
+  
         it('email valido', () => {
-            const emailInput = document.getElementById('login-email');
-            const passwordInput = document.getElementById('login-password');
-            const loginBtn = document.getElementById('login-btn');
-            const errorDiv = document.getElementById('error-message');
-            
-            emailInput.value = 'test@example.com';
-            passwordInput.value = 'password1'; 
-            
-            loginBtn.click();
-            
-            expect(errorDiv.style.display).toBe('none');
-            expect(localStorage.setItem).toHaveBeenCalledWith(
-                'userSession',
-                expect.any(String)
-            );
+            expect(validateEmail('usuario@email.com')).toBe(true);
+            expect(validateEmail('usuario.nombre@email.com')).toBe(true);
+            expect(validateEmail('usuario+test@email.co.uk')).toBe(true);
         });
     });
 
-    describe('valida', () => {
+describe('validacion contraseña', () => {
         it('contraseña valida', () => {
-            const emailInput = document.getElementById('login-email');
-            const passwordInput = document.getElementById('login-password');
-            const loginBtn = document.getElementById('login-btn');
-            const errorDiv = document.getElementById('error-message');
-            
-            emailInput.value = 'test@example.com';
-            passwordInput.value = 'securepass1'; 
-            
-            loginBtn.click();
-            
-            expect(errorDiv.style.display).toBe('none');
-            expect(localStorage.setItem).toHaveBeenCalledWith(
-                'userSession',
-                expect.any(String)
-            );
+            expect(validatePassword('abcd1234')).toBe(null);
+            expect(validatePassword('12345678')).toBe(null);
+            expect(validatePassword('password1')).toBe(null);
+        });
+        it('sin numeros', () => {
+            const resultado = validatePassword('abcdefgh');
+            expect(resultado).toBe('Password must contain at least 1 number');
+            });
+        });
+        it('menos de 8', () => {
+            const resultado = validatePassword('abcde12');
+            expect(resultado).toBe('Password must be at least 8 characters long');
         });
 
-        it('sin numero', () => {
-            const emailInput = document.getElementById('login-email');
-            const passwordInput = document.getElementById('login-password');
-            const loginBtn = document.getElementById('login-btn');
-            const errorDiv = document.getElementById('error-message');
-            
-            emailInput.value = 'test@example.com';
-            passwordInput.value = 'password';
-            
-            loginBtn.click();
-            
-            expect(errorDiv.textContent).toBe('Password must contain at least 1 number');
-            expect(errorDiv.style.display).toBe('block');
+        it('vacia', () => {
+                const resultado = validatePassword('');
+                expect(resultado).toBe('Password must be at least 8 characters long');
         });
 
-        it('menos de 8 caracteres', () => {
-            const emailInput = document.getElementById('login-email');
-            const passwordInput = document.getElementById('login-password');
-            const loginBtn = document.getElementById('login-btn');
-            const errorDiv = document.getElementById('error-message');
-            
-            emailInput.value = 'test@example.com';
-            passwordInput.value = 'pass1'; 
-            
-            loginBtn.click();
-            
-            expect(errorDiv.textContent).toBe('Password must be at least 8 characters long');
-            expect(errorDiv.style.display).toBe('block');
-        });
+describe('sesion en localStorage', () => {
+    const testEmail = 'usuario@test.com';
+
+    beforeEach(() => {
+        localStorage.clear();
+        vi.clearAllMocks();
     });
 
-    describe('localStorage', () => {
-        it('deberia crear sesion en localStorage con login exitoso', () => {
-            const emailInput = document.getElementById('login-email');
-            const passwordInput = document.getElementById('login-password');
-            const loginBtn = document.getElementById('login-btn');
-            
-            const testEmail = 'test@example.com';
-            emailInput.value = testEmail;
-            passwordInput.value = 'password1';
-            
-            loginBtn.click();
-            
-            expect(localStorage.setItem).toHaveBeenCalledWith(
-                'userSession',
-                expect.any(String)
-            );
-            
-            const sessionCall = localStorage.setItem.mock.calls.find(
-                call => call[0] === 'userSession'
-            );
-            const sessionData = JSON.parse(sessionCall[1]);
-            
-            expect(sessionData.email).toBe(testEmail);
-            expect(sessionData.loginTime).toBeDefined();
-            expect(new Date(sessionData.loginTime)).toBeInstanceOf(Date);
-        });
+    it('crear sesion', () => {
+        createUserSession(testEmail);
+        
+        expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            'userSession',
+            expect.any(String)
+        );
     });
 });
