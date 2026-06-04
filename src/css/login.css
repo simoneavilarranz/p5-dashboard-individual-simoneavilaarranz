@@ -60,7 +60,7 @@
     color: var(--gris-oscuro);
 }
 
-.login-card button {
+#login-btn {
     width: 100%;
     background-color: var(--negro);
     min-height: 3em;
@@ -69,4 +69,14 @@
     border-radius: var(--radio);
     border-style: none;
     margin-top: 30px;
+}
+
+#login-btn:hover {
+    background-color: var(#3f3f3f);
+}
+
+#error-message {
+    color: red;
+    font-size: 14px; 
+    display: none
 }
