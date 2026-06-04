@@ -76,7 +76,8 @@
 }
 
 #error-message {
+    display: none;
     color: red;
-    font-size: 14px; 
-    display: none
+    margin: 10px 0;
+    font-size: 14px;
 }
