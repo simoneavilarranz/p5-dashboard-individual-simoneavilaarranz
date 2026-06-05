@@ -32,6 +32,10 @@ nav a:visited {
     text-decoration: none;
 }
 
+.dashboard-filters {
+    text-align: center;
+    margin: auto;
+}
 
 .filters-btn {
     background-color: var(--negro);
@@ -42,6 +46,36 @@ nav a:visited {
     border-style: none;
     padding: 10px;
     margin-bottom: 30px;
+}
+
+.filters-btn:hover {
+    background-color: var(--gris-oscuro);
+    color: var(--blanco);
+}
+
+.filters-btn.active {
+    background-color: var(--negro);
+    color: var(--blanco);
+    border-color: var(--negro);
+}
+
+.filters-btn:not(.active) {
+    background-color: var(--gris-medio);
+    color: var(--gris-oscuro);
+}
+
+.filters-btn:not(.active):hover {
+    opacity: 1;
+    background-color: var(--negro);
+    color: var(--blanco);
+}
+
+.no-results {
+    text-align: center;
+    font-size: 18px;
+    color: var(--gris-oscuro);
+    grid-column: 1 / -1;
+    padding: 40px;
 }
 
 .dashboard-gallery {
