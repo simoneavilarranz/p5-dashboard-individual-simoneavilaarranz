@@ -1,24 +1,25 @@
 import { isAuthenticated, clearUserSession } from './auth.js';
 
-// Verificar autenticación
 if (!isAuthenticated()) {
     window.location.href = '/index.html';
 }
 
-// Configurar logout
 document.getElementById('logout-link').addEventListener('click', function(e) {
     e.preventDefault();
     clearUserSession();
     window.location.href = '/index.html';
 });
 
-// Obtener y mostrar empleados
 const dashboardGallery = document.querySelector('.dashboard-gallery');
+const filterButtons = document.querySelectorAll('.filters-btn');
+
+let allEmployees = [];
 
 async function fetchEmployees() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/users');
         const users = await response.json();
+        allEmployees = users;
         displayEmployees(users);
     } catch (error) {
         console.error('Error fetching employees:', error);
@@ -55,11 +56,35 @@ function createEmployeeCard(employee) {
 function displayEmployees(employees) {
     dashboardGallery.innerHTML = '';
     
+    if (employees.length === 0) {
+        dashboardGallery.innerHTML = '<p class="no-results">No employees found</p>';
+        return;
+    }
+    
     employees.forEach(employee => {
         const card = createEmployeeCard(employee);
         dashboardGallery.appendChild(card);
     });
 }
 
-// Cargar empleados al iniciar
+filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const filter = this.textContent;
+        
+        // Remover clase activa de todos los botones
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Añadir clase activa al botón clickeado
+        this.classList.add('active');
+        
+        if (filter === 'All employees') {
+            displayEmployees(allEmployees);
+        } else {
+            const filteredEmployees = allEmployees.filter(employee => 
+                employee.name.charAt(0).toUpperCase() === filter
+            );
+            displayEmployees(filteredEmployees);
+        }
+    });
+});
+
 fetchEmployees();

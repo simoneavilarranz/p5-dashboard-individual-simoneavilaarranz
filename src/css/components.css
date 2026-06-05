@@ -32,9 +32,6 @@ nav a:visited {
     text-decoration: none;
 }
 
-.dashboard-filters {
-    margin: auto;
-}
 
 .filters-btn {
     background-color: var(--negro);
