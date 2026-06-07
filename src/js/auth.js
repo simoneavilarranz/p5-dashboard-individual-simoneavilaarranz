@@ -1,5 +1,3 @@
-// auth.js
-
 export async function loadCredentials() {
     try {
         const response = await fetch('/src/data/credentials.json');

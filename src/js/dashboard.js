@@ -71,9 +71,7 @@ filterButtons.forEach(button => {
     button.addEventListener('click', function() {
         const filter = this.textContent;
         
-        // Remover clase activa de todos los botones
         filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Añadir clase activa al botón clickeado
         this.classList.add('active');
         
         if (filter === 'All employees') {
