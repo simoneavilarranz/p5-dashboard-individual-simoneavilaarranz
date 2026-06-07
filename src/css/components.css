@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -35,6 +44,7 @@ nav a:visited {
 .dashboard-filters {
     text-align: center;
     margin: auto;
+    animation: fadeIn 0.2s ease-out 0.05s both;
 }
 
 .filters-btn {
@@ -51,6 +61,7 @@ nav a:visited {
 .filters-btn:hover {
     background-color: var(--gris-oscuro);
     color: var(--blanco);
+    cursor: pointer;
 }
 
 .filters-btn.active {
@@ -76,6 +87,7 @@ nav a:visited {
     color: var(--gris-oscuro);
     grid-column: 1 / -1;
     padding: 40px;
+    animation: fadeIn 0.2s ease-out;
 }
 
 .dashboard-gallery {
@@ -85,6 +97,7 @@ nav a:visited {
     padding: 20px;
     margin: 0 auto;
     max-width: 1400px;
+    animation: fadeIn 0.2s ease-out 0.05s both;
 }
 
 .employee-card {
@@ -92,6 +105,7 @@ nav a:visited {
     border: 2px solid var(--gris-borde);
     border-radius: var(--radio);
     padding: 25px;
+    animation: fadeIn 0.15s ease-out 0.05s both;
 }
 
 .employee-card h3 {

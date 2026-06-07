@@ -1,6 +1,29 @@
+/* Animación de fade-in y slide-up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de fade-in simple (alternativa) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 #login {
     text-align: center;
     margin: auto;
+    animation: fadeInUp 0.6s ease-out;
 }
 
 #login h1 {
@@ -62,22 +85,26 @@
 
 #login-btn {
     width: 100%;
-    background-color: var(--negro);
+    background-color: var(--gris-medio);
+    color: var(--gris-oscuro);
     min-height: 3em;
-    color: var(--blanco);
     font-size: 18px;
     border-radius: var(--radio);
     border-style: solid;
-    border-color: var(--negro);
-    border-width: 2px;
     margin-top: 30px;
 }
 
 #login-btn:hover {
-    background-color: #565656;
-    border-style: solid;
+    background-color: var(--negro);
+    color: var(--blanco);
     border-color: var(--negro);
-    border-width: 3px;
+    background-color: var(--negro);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+#login-btn:active {
+    transform: translateY(1px);
 }
 
 #error-message {
@@ -85,4 +112,5 @@
     color: red;
     margin: 10px 0;
     font-size: 14px;
+    animation: fadeIn 0.3s ease-out;
 }
