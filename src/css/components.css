@@ -7,6 +7,15 @@
     }
 }
 
+.logo-dashboard {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.marca {
+    display: flex;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
