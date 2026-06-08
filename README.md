@@ -40,7 +40,7 @@ La planificación del trabajo a realizar fue gestionada a través de Jira. Se cr
 🔵 Escribir test unitario con Vitest  
 🟢 Acceso al dashboard administrativo  
 🟢 Listado de empleados  
-🟢 Filtrado de seguridad por la primera letra del nombre  
+🟢 Filtrado de empleados por la primera letra del nombre  
 🟢 Logout del dashboard  
 🟢 Validación de credenciales en el formulario del login  
 
@@ -59,6 +59,9 @@ La planificación del trabajo a realizar fue gestionada a través de Jira. Se cr
 🔵 Configurar Jira con épicas e historias de usuario  
 🔵 Documentar los commits  
 
+<img src="./src/assets/jira1.png">
+<img src="./src/assets/jira2.png">
+<img src="./src/assets/jira3.png">
 
 ## Prototipo
 
@@ -78,10 +81,67 @@ En base al sketch se creó el userflow definiendo los pasos que seguiría el usu
 
 ## Historias de usuario y criterios de aceptación
 
+🟢 **Acceso al dashboard administrativo**  
+- *Como* usuario administrador
+- *Quiero* acceder a un dashboard mediante email y contraseña
+- *Para* poder gestionar la información de los empleados  
 
+🟢 **Listado de empleados**  
+- *Como* usuario administrador autenticado
+- *Quiero* ver un listado de empleados
+- *Para* consultar sus datos básicos de contacto y dirección  
+
+🟢 **Filtrado de empleados por la primera letra del nombre**  
+- *Como* usuario administrador autenticado
+- *Quiero* filtrar el listado de empleados por la primera letra del nombre
+- *Para* encontrar más rápido a un empleado concreto  
+
+🟢 **Logout del dashboard**  
+- *Como*  usuario administrador autenticado
+- *Quiero* filtrar el listado de empleados por la primera letra del nombre
+- *Para* encontrar más rápido a un empleado concreto
+
+🟢 **Validación de credenciales en el formulario del login**  
+- *Como* usuario administrador autenticado
+- *Quiero* poder cerrar sesión desde el dashboard
+- *Para* que nadie más pueda usar mi sesión abierta  
 
 ## Instalación
 
+- Paso 1: Clonar repositorio.
 
+<img src="./src/assets/instalacion1.jpg">
+
+- Paso 2: Instalar dependencias.
+
+```javascript
+npm install -D vitest
+```
+
+- Paso 3: Crear archivo "credentials.json" dentro de la carpeta "data" para añadir las credenciales de usuario admin, añadir "src/data/credentials.json" a archivo .gitignore
+
+```javascript
+{
+  "admin": {
+    "email": "admin@empresa.com",
+    "password": "Admin1234"
+  }
+}
+```
+
+- Paso 4: Realizar los tests en pestaña "testing" para asegurar el funcionamiento de la aplicación.
+
+<img src="./src/assets/tests.jpg">
+
+- Paso 5: Para utilizar la aplicación utilizar "Open with Live Server" en el archivo "index.html" situado en la raíz del proyecto, ya que es el archivo del login.
 
 ## Resultado final
+
+<img src="./src/assets/resultado1.png">
+<img src="./src/assets/resultado2.png">
+<img src="./src/assets/resultado3.png">
+<img src="./src/assets/resultado4.png">
+
+## Autora
+
+- Simone Ávila Arranz
