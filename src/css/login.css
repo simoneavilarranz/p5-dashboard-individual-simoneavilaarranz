@@ -117,3 +117,60 @@
     font-size: 14px;
     animation: fadeIn 0.3s ease-out;
 }
+
+@media screen and (max-width: 768px) {
+    .login-card {
+        width: 90%;
+        max-width: 25em;
+        padding: 25px;
+    }
+
+    #login h1 {
+        font-size: 26px;
+    }
+
+    #login h2 {
+        font-size: 16px;
+    }
+
+    .logo {
+        width: 60px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .login-card {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #login h1 {
+        font-size: 22px;
+    }
+
+    #login h2 {
+        font-size: 14px;
+    }
+
+    .logo {
+        width: 50px;
+    }
+
+    #login-btn {
+        font-size: 16px;
+        min-height: 2.8em;
+    }
+
+    .login-input {
+        min-height: 2.8em;
+        margin-bottom: 20px;
+    }
+
+    .login-card label {
+        font-size: 13px;
+    }
+
+    #error-message {
+        font-size: 13px;
+    }
+}

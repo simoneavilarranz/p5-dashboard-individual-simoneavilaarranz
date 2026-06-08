@@ -52,8 +52,29 @@ nav a:visited {
 
 .dashboard-filters {
     text-align: center;
-    margin: auto;
+    margin: 0 auto 30px auto;
     animation: fadeIn 0.2s ease-out 0.05s both;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 50px;
+    padding: 5px 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.dashboard-filters::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
 }
 
 .filters-btn {
@@ -63,14 +84,25 @@ nav a:visited {
     font-weight: lighter;
     border-radius: 20px;
     border-style: none;
-    padding: 10px;
-    margin-bottom: 30px;
+    padding: 10px 20px;
+    margin: 0 5px;
+    white-space: nowrap;
+    display: inline-block;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .filters-btn:hover {
     background-color: var(--gris-oscuro);
     color: var(--blanco);
     cursor: pointer;
+}
+
+.filters-btn:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .filters-btn.active {
@@ -136,4 +168,112 @@ nav a:visited {
 .employee-info strong {
     color: var(--negro);
     font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+    }
+
+    nav h1 {
+        font-size: 18px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .dashboard-filters {
+        margin: 0 auto 20px auto;
+        padding: 10px 25px;
+        gap: 8px;
+    }
+
+    .filters-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+        margin: 0 4px;
+        flex: 0 0 auto;
+    }
+
+    .dashboard-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .employee-card {
+        padding: 20px;
+    }
+
+    .employee-card h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .no-results {
+        font-size: 16px;
+        padding: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    nav {
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    nav h1 {
+        font-size: 24px;
+    }
+
+    nav a {
+        font-size: 18px;
+        padding-bottom: 10px;
+    }
+
+    .logo-dashboard {
+        width: 30px;
+    }
+
+    .dashboard-filters {
+        margin: 0 0 20px 0;
+        padding: 8px 15px;
+        gap: 6px;
+        max-width: 100%;
+        min-height: 45px;
+    }
+
+    .filters-btn {
+        font-size: 18px;
+        padding: 6px 14px;
+        margin: 0 3px;
+        flex: 0 0 auto;
+    }
+
+    .dashboard-gallery {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .employee-card {
+        padding: 15px;
+    }
+
+    .employee-card h3 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .employee-info p {
+        font-size: 13px;
+    }
+
+    .no-results {
+        font-size: 14px;
+        padding: 20px;
+    }
 }

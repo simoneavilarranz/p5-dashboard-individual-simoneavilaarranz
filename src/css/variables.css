@@ -19,4 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0px;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
